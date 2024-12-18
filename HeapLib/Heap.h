@@ -86,11 +86,27 @@ public:
 		return table.size();
 	}
 
-	void insert(KeyValueType const& keyValue)
-	{
-		//TODO Implement insert methods that insert the key value pair into the heap
+void insert(std::pair<KeyType, ValueType> const& keyValue)
+{
+	table.push_back(keyValue);
 
+	size_t index = table.size() - 1;
+
+	while (index > 0)
+	{
+		size_t parentIndex = (index - 1) / 2;
+
+		if (table[parentIndex].first < table[index].first)
+		{
+			std::swap(table[parentIndex], table[index]); 
+			index = parentIndex;
+		}
+		else
+		{
+			break;
+		}
 	}
+}
 
 	KeyValueType& peek()
 	{
